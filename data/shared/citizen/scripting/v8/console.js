@@ -3,6 +3,7 @@
 (function (global) {
     const monitorMode = (GetConvar('monitormode', 'false') == 'true')  && IsDuplicityVersion();
     const percent = '%'.charCodeAt(0);
+
     const stringSpecifier = 's'.charCodeAt(0);
     const decimalSpecifier = 'd'.charCodeAt(0);
     const floatSpecifier = 'f'.charCodeAt(0);
@@ -92,7 +93,7 @@
         switch (true) {
             case arg === null:
                 return 'null';
-
+                
             case arg === undefined:
                 return 'undefined'
 
@@ -154,10 +155,10 @@
 
     /**
      * WHATWG Spec compliant formatter
-     *
+     * 
      * @see https://console.spec.whatwg.org/#formatter
-     * @param {*} message
-     * @param {*} args
+     * @param {*} message 
+     * @param {*} args 
      */
     function format(message = undefined, ...args) {
         if (typeof message === "undefined") {
@@ -204,7 +205,7 @@
             }
 
             result[result.length] = formattedMessage;
-        }
+        }        
 
         return result.concat(args.slice(usedArgs).map(formatValue)).join(' ');
     }
@@ -217,7 +218,7 @@
             this._counters = new Map();
 
             //TODO: Improve the sync console output.
-            this.log = (monitorMode)? this.logSync.bind(this) : this.log.bind(this);
+            this.log = (monitorMode) ? this.logSync.bind(this) : this.log.bind(this);
             this.info = this.info.bind(this);
             this.warn = this.warn.bind(this);
             this.time = this.time.bind(this);
@@ -271,8 +272,8 @@
             this._trace(format(message, ...optionalParams));
         }
 
-		logSync(message = undefined, ...optionalParams) {
-			process.stdout.write(format(message, ...optionalParams)+"\n");
+        logSync(message = undefined, ...optionalParams) {
+            process.stdout.write(format(message, ...optionalParams)+"\n");
         }
 
         debug(message = undefined, ...optionalParams) {
